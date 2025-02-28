@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Comment {
-    //댓글의 개별 프라이머리키
+    // 댓글의 개별 primary key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

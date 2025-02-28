@@ -15,23 +15,21 @@ import java.util.List;
 public class ArticleService {
     private final ArticleDAO dao;
 
-    public List<ArticleDTO> getAllArticle() {
-        List<Article>articleList= dao.getAllArticles();
+    public List<ArticleDTO> getAllArticles() {
+        List<Article> articleList = dao.getAllArticles();
 
-        if(ObjectUtils.isEmpty(articleList)){
-            //비어있으면
+        if (ObjectUtils.isEmpty(articleList)) {
+            // 비어있으면
             return Collections.emptyList();
         }
-        return  articleList
+        return articleList
                 .stream()
-                .map(x->ArticleDTO.fromEntity(x))
+                .map(x -> ArticleDTO.fromEntity(x))
                 .toList();
     }
 
-    public void insertArticle(ArticleDTO dto){
+    public void insertArticle(ArticleDTO dto) {
         dao.insertArticle(ArticleDTO.fromDto(dto));
-
-
     }
 
     public ArticleDTO getOneArticle(Long id) {
