@@ -12,30 +12,30 @@ import org.springframework.stereotype.Component;
 public class CommentDAO {
     @Autowired
     EntityManager em;
+
     public Long deleteComment(Long id) {
-        Comment comment = em.find(Comment.class,id);
+        Comment comment = em.find(Comment.class, id);
         em.remove(comment);
         return comment.getArticle().getId();
     }
 
-    public void insertComment(Long articleId, Comment comment) {
-        Article article = em.find(Article.class,articleId);
-        //댓글 객체에 게시글 객체 추가
+    public void insetComment(Long articleId, Comment comment) {
+        Article article = em.find(Article.class, articleId);
+        // 댓글객체에 게시글 객체 추가
         comment.setArticle(article);
-        //게시글의 댓글 리스트에 comment 추가
+        // 게시글의 댓글 이스크에 comment 출가
         article.getComments().add(comment);
-        //Persist 선언 해 놓았으니까 article 저장
+        // Persist 선언 해 놨으니까.. article 저장
         em.persist(article);
-
     }
 
     public Comment findByCommentId(Long commentId) {
-        return em.find(Comment.class,commentId);
+        return em.find(Comment.class, commentId);
     }
 
     public void updateComment(Comment comment) {
         Comment original = em.find(Comment.class, comment.getId());
-        //Dirty Checking 으로 값만 변경하면 DB에 저장 됨
+        // Dirty Checking 으로 값만 변경하면 DB에 저장 됨.
         original.setNickname(comment.getNickname());
         original.setBody(comment.getBody());
     }

@@ -22,24 +22,22 @@ public class CommentService {
     }
 
     public void insertComment(Long articleId, CommentDTO dto) {
-        commentDAO.insertComment(articleId,
+        commentDAO.insetComment(articleId,
                 CommentDTO.fromDto(dto));
     }
 
     public Map<String, Object> findByCommentId(Long commentId) {
         Comment comment = commentDAO.findByCommentId(commentId);
-        Map<String,Object>data = new HashMap<>();
-        if(ObjectUtils.isEmpty(comment)){
-            data.put("articleId",null);
-            data.put("dto",null);
-
-        }else{
-            data.put("articleId",comment.getArticle().getId());
-            CommentDTO commentDTO = null;
-            data.put("dto",commentDTO.fromEntity(comment));
-    }
+        Map<String, Object> data = new HashMap<>();
+        if (ObjectUtils.isEmpty(comment)) {
+            data.put("articleId", null);
+            data.put("dto", null);
+        } else {
+            data.put("articleId", comment.getArticle().getId());
+            data.put("dto", CommentDTO.fromEntity(comment));
+        }
         return data;
-}
+    }
 
     public void updateComment(CommentDTO dto) {
         commentDAO.updateComment(CommentDTO.fromDto(dto));

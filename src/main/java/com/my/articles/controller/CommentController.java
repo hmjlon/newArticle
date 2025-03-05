@@ -24,7 +24,7 @@ public class CommentController {
     // 댓글 삭제 작업
     @GetMapping("comments/{id}")
     public String deleteComment(@PathVariable("id") Long id) {
-        // 댓글 삭제 요청
+        // 건네받은 댓글 아이디로 삭제 요청
         Long articleId = commentService.deleteComment(id);
         return "redirect:/articles/" + articleId;
     }
@@ -34,7 +34,7 @@ public class CommentController {
     public String insertComment(CommentDTO dto,
                                 @PathVariable("id") Long articleId) {
         System.out.println(dto);
-        commentService.insertComment(articleId,dto);
+        commentService.insertComment(articleId, dto);
         return "redirect:/articles/" + articleId;
     }
 
@@ -45,7 +45,7 @@ public class CommentController {
         // 댓글 읽어와서 view에 전달하기
         Map<String, Object> data = commentService.findByCommentId(commentId);
         model.addAttribute("articleId", data.get("articleId"));
-        model.addAttribute("dto",data.get("dto"));
+        model.addAttribute("dto", data.get("dto"));
         return "/articles/update_comment";
     }
 
